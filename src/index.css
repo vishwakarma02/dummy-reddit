@@ -1,0 +1,69 @@
+body {
+  /* background-color: #e2e2e2; */
+  margin: 0;
+  padding: 0;
+  font-family: helvetica, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
+    monospace;
+}
+
+a{
+  text-decoration: none;
+}
+
+.dr-d-none{
+  display: none;
+}
+.dr-d-flex{
+  display: flex;
+}
+
+.dr-card{
+  margin-bottom: 16px;
+  background: #FFF;
+  padding: 16px 8px;
+  border-bottom: 1px solid #e2e2e2;
+}
+.dr-img-wrapper{
+  min-width: 70px;
+  height: 52px;
+  display: block;
+  background-size: cover;
+  border-radius: 4px;
+  margin-right: 16px;
+}
+.dr-article__header{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  font-size: 13px;
+}
+.dr-article__header a{
+  color: #a5a4a4;
+}
+.dr-article__header__child--separator::after{
+  content: '\25CF';
+  color: #ccccca;
+}
+a.dr-article__header__post-reddit-link{
+  color: #0079d3;
+}
+
+.dr-article__footer__child{
+  display: flex;
+}
+.dr-article__footer__child--left{
+  justify-content: flex-start;
+}
+.dr-article__footer__child--right{
+  justify-content: flex-end;
+}
+
+.dr-thumbnail--hide{
+  display: none;
+}

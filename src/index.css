@@ -37,11 +37,15 @@ a{
   border-radius: 4px;
   margin-right: 16px;
 }
+.dr-article__header-footer-wrapper{
+  flex-grow: 1;
+}
 .dr-article__header{
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-between;
+  justify-content: flex-start;
   font-size: 13px;
+  margin-bottom: 8px;
 }
 .dr-article__header a{
   color: #a5a4a4;
@@ -49,12 +53,20 @@ a{
 .dr-article__header__child--separator::after{
   content: '\25CF';
   color: #ccccca;
+  margin: auto 8px;
 }
 a.dr-article__header__post-reddit-link{
   color: #0079d3;
 }
-
+.dr-article__body{
+  font-size: 14px;
+  margin-bottom: 16px;
+}
+.dr-article__body a{
+  color: #222;
+}
 .dr-article__footer__child{
+  font-size: 12px;
   display: flex;
 }
 .dr-article__footer__child--left{

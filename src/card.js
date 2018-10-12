@@ -10,6 +10,22 @@ class Card extends Component {
       let diffHours = (currentTime-postedOn)/3600  ;
       return (parseInt(diffHours)+'h');
     }
+    function getThumbnail(){
+      // console.log(data.data.thumbnail);
+      if(data.data.thumbnail === 'default' || data.data.thumbnail==='nsfw'){
+        if(typeof(data.data.preview)==='undefined'){
+          console.log('this image preview is not defined');
+          console.log(data.data.title);
+          console.log('-------------------------');
+          return;
+        }
+        console.log(data.data.title);
+        return ((data.data.preview.images[0].resolutions[0].url).replace(/&amp;/g, '&'));
+      }
+      else{
+        return data.data.thumbnail;
+      }
+    }
     return (
       // card template
       <article className='dr-card'>
@@ -22,7 +38,8 @@ class Card extends Component {
               className='dr-img-wrapper'
               style={
                 {
-                backgroundImage: 'url('+ ((data.data.thumbnail === 'default') ? (data.data.preview.images[0].source.url) : data.data.thumbnail) +')',
+                // backgroundImage: 'url('+ ((data.data.thumbnail === 'default') ? ' ' : data.data.thumbnail) +')',
+                backgroundImage: ('url('+getThumbnail()+')')
                 }
               }
             >

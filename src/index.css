@@ -110,4 +110,9 @@ a.dr-article__header__post-reddit-link{
   background-color: #FFF;
   border-radius: 4px;
   box-shadow: 1px 6px 20px rgba(0, 0, 0, 0.32);
+  text-align: center;
+}
+#dr-modal img{
+  width: 50px;
+  height: 50px;
 }

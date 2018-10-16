@@ -7,18 +7,11 @@ class Card extends Component {
     function getHoursDiff(){
       let postedOn = data.data.created_utc;
       let currentTime = (new Date()).getTime()/1000;
-      let diffHours = (currentTime-postedOn)/3600  ;
+      let diffHours = (currentTime-postedOn)/3600;
       return (parseInt(diffHours)+'h');
     }
     function getThumbnail(){
-      // console.log(data.data.thumbnail);
       if(data.data.thumbnail === 'default' || data.data.thumbnail==='nsfw'){
-        if(typeof(data.data.preview)==='undefined'){
-          console.log('this image preview is not defined');
-          console.log(data.data.title);
-          console.log('-------------------------');
-          return;
-        }
         console.log(data.data.title);
         return ((data.data.preview.images[0].resolutions[0].url).replace(/&amp;/g, '&'));
       }
@@ -32,7 +25,7 @@ class Card extends Component {
         {/* header footer article wrapper */}
         <div className='dr-d-flex'>
           {/* thumbnail for post */}
-          {!(data.data.is_self) ? <div>
+          {!(!data.data.thumbnail_height || data.data.is_self) ? <div>
             <a
               href={data.data.permalink}
               className='dr-img-wrapper'
@@ -117,12 +110,22 @@ class Card extends Component {
         <div className='dr-article__footer row'>
           <div className='col-6'>
             <div className='dr-article__footer__child dr-article__footer__child--left'>
-              <button>Share</button>
+              <button> <i className='flaticon-share'></i></button>
               <a
                 href={data.data.url}
                 target='_blank'
                 rel="noopener noreferrer"
+                className='dr-comments'
                 >
+                <i className='flaticon-chat'
+                style={
+                  {
+                  // backgroundImage: 'url('+ ((data.data.thumbnail === 'default') ? ' ' : data.data.thumbnail) +')',
+                  marginRight: '4px',
+                  marginLeft: '4px',
+                  }
+                }
+                ></i>
                 {data.data.num_comments} Comments
               </a>
             </div>
@@ -130,11 +133,11 @@ class Card extends Component {
 
           <div className='col-6'>
             <div className='dr-article__footer__child dr-article__footer__child--right'>
-              <button>. . .</button>
+              {/* <button><i className='flaticon-menu'></i></button> */}
               <div>
-                <button>up</button>
+                <button><i className='flaticon-chevron-arrow-up'></i></button>
                 <span>{data.data.score}</span>
-                <button>Down</button>
+                <button><i className='flaticon-chevron-arrow-down'></i></button>
               </div>
             </div>
           </div>

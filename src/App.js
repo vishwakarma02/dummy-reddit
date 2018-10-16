@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import './App.css';
+import './font/flaticon.css';
 import Card from './card';
+// import Modal from './modal';
 
 class App extends Component {
 
@@ -8,17 +10,43 @@ class App extends Component {
     super(props);
     this.updateStateObject = this.updateStateObject.bind(this);
     this.setNewTrigger = this.setNewTrigger.bind(this);
+    this.loadMorePostOnScroll = this.loadMorePostOnScroll.bind(this);
+    this.showModal = this.showModal.bind(this);
     this.state = {
-      data: []
+      data: [],
+      showModal: false
     };
+  }
+
+  showModal(){
+    if(this.state.showModal === true){
+      this.setState({
+        showModal: false
+      });
+    }
+    else{
+      this.setState({
+        showModal: true
+      })
+    }
   }
 
 
   //load more post on scroll
   loadMorePostOnScroll(){
-    // if(document.querySelector('.lastPost').getBoundingClientRect().top < (this.props.viewportHeight+10)){
-    // };
-    console.log(this.viewportHeight);
+    let body = document.querySelector('body');
+    let offsetHeight = parseInt(body.offsetHeight);
+    let scrolledAmount = parseInt(window.pageYOffset);
+    let triggerPoint = parseInt(scrolledAmount) + parseInt(window.innerHeight);
+    if((offsetHeight) < (triggerPoint)){
+      if(body.classList.contains('updatingData')){
+        return;
+      }
+      else{
+        body.classList.add('updatingData');
+        this.updateStateObject();
+      }
+    }
   }
 
   setNewTrigger(){
@@ -44,7 +72,7 @@ class App extends Component {
       })
       .then(response=>{
         let newArr = [...this.state.data, ...response.data.children];
-        // console.log(newArr);
+        console.log(newArr);
         this.setState({
           // data: response.data.children
           data: newArr
@@ -55,6 +83,8 @@ class App extends Component {
       });
   }
 
+  
+
   //load data after component is mounted into the DOM Tree
   componentDidMount(){
     this.updateStateObject();
@@ -63,22 +93,25 @@ class App extends Component {
 
   componentDidUpdate(){
     this.setNewTrigger();
-    let viewportHeight = window.innerHeight;
+    let body = document.querySelector('body');
+    if(body.classList.contains('updatingData')){
+      body.classList.remove('updatingData');
+    }
   }
   
   render() {
     const { data } = this.state;
     const list = data.map((data, index)=>{
       return (
-        <Card data={data} key={data.data.id}/>
+        <Card data={data} key={index}/> //key={data.data.id}
       );
     });
     return (
       <div>
-        <div className='container'>
+        <div className='container' id='wrapper'>
           {list}
         </div>
-        <button onClick={this.updateStateObject}>update list</button>
+        {/* <Modal showModal={} /> */}
       </div>
     )
   }

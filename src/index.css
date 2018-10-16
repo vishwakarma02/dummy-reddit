@@ -75,7 +75,27 @@ a.dr-article__header__post-reddit-link{
 .dr-article__footer__child--right{
   justify-content: flex-end;
 }
+.dr-article__footer__child--left button,
+.dr-article__footer__child--right button{
+  background-color: transparent;
+  border: none;
+}
+.dr-article__footer__child--left i::before{
+  font-size: 14px;
+}
+.dr-article__footer__child--right i::before{
+  font-size: 12px;
+  color: #313131;
+}
 
-.dr-thumbnail--hide{
+.dr-comments{
+  color: #313131;
+  text-decoration: none;
+}
+
+/* .dr-thumbnail--hide{
   display: none;
+} */
+[class^="flaticon-"]:before, [class*=" flaticon-"]:before, [class^="flaticon-"]:after, [class*=" flaticon-"]:after{
+  margin-left: 0 !important;
 }

@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import 'react-app-polyfill/ie11';
 import 'bootstrap/dist/css/bootstrap-grid.min.css';
 import './index.css';
 import App from './App';

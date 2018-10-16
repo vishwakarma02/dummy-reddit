@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import './App.css';
 import './font/flaticon.css';
 import Card from './card';
+import Modal from './modal';
 // import Modal from './modal';
 
 class App extends Component {
@@ -11,24 +12,25 @@ class App extends Component {
     this.updateStateObject = this.updateStateObject.bind(this);
     this.setNewTrigger = this.setNewTrigger.bind(this);
     this.loadMorePostOnScroll = this.loadMorePostOnScroll.bind(this);
-    this.showModal = this.showModal.bind(this);
+    this.toggleModal = this.toggleModal.bind(this);
     this.state = {
       data: [],
-      showModal: false
+      isModalOpen: false
     };
   }
 
-  showModal(){
-    if(this.state.showModal === true){
+  toggleModal(){
+    if(this.state.isModalOpen){
       this.setState({
-        showModal: false
+        isModalOpen: false
       });
     }
     else{
       this.setState({
-        showModal: true
-      })
+        isModalOpen: true
+      });
     }
+    console.log('toggleModal hit');
   }
 
 
@@ -97,13 +99,15 @@ class App extends Component {
     if(body.classList.contains('updatingData')){
       body.classList.remove('updatingData');
     }
+    console.log(this.state.isModalOpen);
   }
   
   render() {
-    const { data } = this.state;
+    const { data, isModalOpen } = this.state;
+    // const { data } = this.state;
     const list = data.map((data, index)=>{
       return (
-        <Card data={data} key={index}/> //key={data.data.id}
+        <Card data={data} isModalOpen={isModalOpen} key={index} toggleModal={this.toggleModal}/> //key={data.data.id}
       );
     });
     return (
@@ -111,7 +115,9 @@ class App extends Component {
         <div className='container' id='wrapper'>
           {list}
         </div>
-        {/* <Modal showModal={} /> */}
+        {
+          (isModalOpen ? <Modal toggleModal={this.toggleModal} /> : '')
+        }
       </div>
     )
   }

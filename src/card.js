@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 class Card extends Component {
   render() {
     const {data} = this.props;
+    // const {isModalOpen} = this.props;
 
     function getHoursDiff(){
       let postedOn = data.data.created_utc;
@@ -110,7 +111,7 @@ class Card extends Component {
         <div className='dr-article__footer row'>
           <div className='col-6'>
             <div className='dr-article__footer__child dr-article__footer__child--left'>
-              <button> <i className='flaticon-share'></i></button>
+              <button onClick={this.props.toggleModal}> <i className='flaticon-share'></i></button>
               <a
                 href={data.data.url}
                 target='_blank'
@@ -143,6 +144,7 @@ class Card extends Component {
           </div>
         </div>
         {/* article footer ends */}
+        
       </article>
       //card template end
     );

@@ -1,6 +1,18 @@
 import React, { Component } from 'react';
 
 class Card extends Component {
+
+  constructor(props){
+    super(props);
+    this.setBookmark = this.setBookmark.bind(this);
+  }
+
+  setBookmark(data){
+    let url = 'https://www.reddit.com/'+data.data.permalink;
+    // ==============================================================================================================
+    console.log(url);
+  }
+
   render() {
     const {data} = this.props;
     // const {isModalOpen} = this.props;
@@ -88,6 +100,7 @@ class Card extends Component {
               {(data.data.link_flair_text) ? <span className='dr-article__header__child'>{data.data.link_flair_text}
               </span> : ''}
               {/* link flair text ends  */}
+              <button onClick={this.setBookmark.bind(this, data)}>Bookmark</button>
 
             </div>
 
@@ -136,9 +149,17 @@ class Card extends Component {
             <div className='dr-article__footer__child dr-article__footer__child--right'>
               {/* <button><i className='flaticon-menu'></i></button> */}
               <div>
-                <button><i className='flaticon-chevron-arrow-up'></i></button>
+                <button 
+                  onClick={this.props.toggleModal}
+                >
+                  <i className='flaticon-chevron-arrow-up'></i>
+                </button>
                 <span>{data.data.score}</span>
-                <button><i className='flaticon-chevron-arrow-down'></i></button>
+                <button
+                  onClick={this.props.toggleModal}
+                >
+                  <i className='flaticon-chevron-arrow-down'></i>
+                </button>
               </div>
             </div>
           </div>

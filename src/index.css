@@ -91,6 +91,7 @@ a.dr-article__header__post-reddit-link{
 .dr-comments{
   color: #313131;
   text-decoration: none;
+  min-width: 136px;
 }
 
 /* .dr-thumbnail--hide{
@@ -111,8 +112,30 @@ a.dr-article__header__post-reddit-link{
   border-radius: 4px;
   box-shadow: 1px 6px 20px rgba(0, 0, 0, 0.32);
   text-align: center;
+  min-width: 250px;
 }
 #dr-modal img{
   width: 50px;
   height: 50px;
+}
+.dr-signin{
+  display: block;
+  background-color: #0079d3;
+  padding: 8px 16px;
+  margin: 8px auto 16px auto;
+  color: #Fff;
+  border-radius: 4px;
+  box-shadow: 0px 2px 6px #00000078;
+}
+.dr-close-modal{
+  position: absolute;
+  top: 0;
+  right: 0;
+  background: none;
+  border: none;
+  background: #0079d3;
+  color: #FFF;
+  font-weight: bold;
+  padding: 4px 8px;
+  box-shadow: 0px 2px 6px #00000078;
 }

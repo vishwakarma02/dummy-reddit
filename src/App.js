@@ -19,7 +19,8 @@ class App extends Component {
     };
   }
 
-  toggleModal(){
+  toggleModal(e){
+    e.preventDefault();
     if(this.state.isModalOpen){
       this.setState({
         isModalOpen: false
@@ -30,7 +31,6 @@ class App extends Component {
         isModalOpen: true
       });
     }
-    console.log('toggleModal hit');
   }
 
 

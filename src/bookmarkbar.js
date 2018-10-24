@@ -22,7 +22,7 @@ class Bookmarkbar extends Component{
         //creating nodes from bookmark array
         let bmList = bmArr.map((el, index)=>{
             return (
-                <li key={index}><a href='el.link' className='bmLinks' title={el.title}>{el.title}</a></li>
+                <li key={index}><a href={el.link} className='bmLinks' title={el.title} target='_blank'>{el.title}</a></li>
             );
         });
         return(

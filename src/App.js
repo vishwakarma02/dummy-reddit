@@ -3,7 +3,7 @@ import './App.css';
 import './font/flaticon.css';
 import Card from './card';
 import Modal from './modal';
-// import Modal from './modal';
+import Bookmarkbar from './bookmarkbar';
 
 class App extends Component {
 
@@ -13,6 +13,7 @@ class App extends Component {
     this.setNewTrigger = this.setNewTrigger.bind(this);
     this.loadMorePostOnScroll = this.loadMorePostOnScroll.bind(this);
     this.toggleModal = this.toggleModal.bind(this);
+    this.toggleBookmark = this.toggleBookmark.bind(this);
     this.state = {
       data: [],
       isModalOpen: false
@@ -31,6 +32,26 @@ class App extends Component {
         isModalOpen: true
       });
     }
+  }
+
+  toggleBookmark(data, key){
+    let modInfo = this.state.data.map((info, index)=>{
+      if(index === key){
+        let url = 'https://www.reddit.com/'+info.data.permalink;
+        if(localStorage.getItem(url)){
+          localStorage.removeItem(url);
+          info.data.bookmark = false;
+        }
+        else{
+          localStorage.setItem(url, info.data.title);   
+          info.data.bookmark = true;       
+        }
+      }
+      return info;
+    });
+    this.setState({
+      data: modInfo
+    });
   }
 
 
@@ -74,10 +95,19 @@ class App extends Component {
       })
       .then(response=>{
         let newArr = [...this.state.data, ...response.data.children];
-        console.log(newArr);
+        let modInfo = newArr.map(info=>{
+          let url = 'https://www.reddit.com/'+info.data.permalink;
+          if(localStorage.getItem(url)){
+            info.data.bookmark = true;
+          }
+          else{
+            info.data.bookmark = false;
+          }
+          return info;
+        })
         this.setState({
           // data: response.data.children
-          data: newArr
+          data: modInfo
         });
       })
       .catch(error=>{
@@ -99,7 +129,6 @@ class App extends Component {
     if(body.classList.contains('updatingData')){
       body.classList.remove('updatingData');
     }
-    console.log(this.state.isModalOpen);
   }
   
   render() {
@@ -107,11 +136,14 @@ class App extends Component {
     // const { data } = this.state;
     const list = data.map((data, index)=>{
       return (
-        <Card data={data} isModalOpen={isModalOpen} key={index} toggleModal={this.toggleModal}/> //key={data.data.id}
+        <Card data={data} isModalOpen={isModalOpen} key={index} postIndex={index} toggleModal={this.toggleModal} toggleBookmark={this.toggleBookmark}/> //key={data.data.id}
       );
     });
     return (
       <div>
+        {
+          (localStorage.length>0)? <Bookmarkbar></Bookmarkbar> : ''
+        }
         <div className='container' id='wrapper'>
           {list}
         </div>

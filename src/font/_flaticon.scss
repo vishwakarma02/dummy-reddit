@@ -1,6 +1,6 @@
     /*
     Flaticon icon font: Flaticon
-    Creation date: 15/10/2018 09:04
+    Creation date: 24/10/2018 09:42
     */
 
     @font-face {
@@ -41,9 +41,11 @@
 .flaticon-chevron-arrow-down:before { content: "\f102"; }
 .flaticon-chat:before { content: "\f103"; }
 .flaticon-menu:before { content: "\f104"; }
+.flaticon-bookmark:before { content: "\f105"; }
     
     $font-Flaticon-share: "\f100";
     $font-Flaticon-chevron-arrow-up: "\f101";
     $font-Flaticon-chevron-arrow-down: "\f102";
     $font-Flaticon-chat: "\f103";
     $font-Flaticon-menu: "\f104";
+    $font-Flaticon-bookmark: "\f105";

@@ -2,20 +2,12 @@ import React, { Component } from 'react';
 
 class Card extends Component {
 
-  constructor(props){
-    super(props);
-    this.setBookmark = this.setBookmark.bind(this);
-  }
-
-  setBookmark(data){
-    let url = 'https://www.reddit.com/'+data.data.permalink;
-    // ==============================================================================================================
-    console.log(url);
-  }
+  // constructor(props){
+  //   super(props);
+  // }
 
   render() {
     const {data} = this.props;
-    // const {isModalOpen} = this.props;
 
     function getHoursDiff(){
       let postedOn = data.data.created_utc;
@@ -25,7 +17,6 @@ class Card extends Component {
     }
     function getThumbnail(){
       if(data.data.thumbnail === 'default' || data.data.thumbnail==='nsfw'){
-        console.log(data.data.title);
         return ((data.data.preview.images[0].resolutions[0].url).replace(/&amp;/g, '&'));
       }
       else{
@@ -100,7 +91,7 @@ class Card extends Component {
               {(data.data.link_flair_text) ? <span className='dr-article__header__child'>{data.data.link_flair_text}
               </span> : ''}
               {/* link flair text ends  */}
-              <button onClick={this.setBookmark.bind(this, data)}>Bookmark</button>
+              <button className={"bookmark "+ (data.data.bookmark? 'active' : '')} onClick={this.props.toggleBookmark.bind(this, data, this.props.postIndex)}><i className='flaticon-bookmark'></i></button>
 
             </div>
 
